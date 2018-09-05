@@ -8,6 +8,8 @@ import winsound as ws
 import os
 import time
 
+#TODO: Config file reader/writer 
+
 def getCurrentTimeInMinutes(): 
     return time.clock() / 60
 
@@ -65,16 +67,19 @@ def menu():
         print("=====================")
         print("1 -> Start Pomodoro Session")
         print("2 -> Exit")
-        menuOption = int(input())
 
-        if(menuOption == 1):
+        try:
+            menuOption = int(input())
             cleanScreen()
-            startPomodoroSession()
-        elif(menuOption == 2):
+            if(menuOption == 1):
+                startPomodoroSession()
+            elif(menuOption == 2):
+                exit(0)
+            else:
+                raise ValueError("Invalid number value")
+        except ValueError:
+            input("Invalid value, please try again")
             cleanScreen()
-            exit()
-        else:
-            print("Invalid value, please try again")
     
 if __name__== '__main__':
     menu()
